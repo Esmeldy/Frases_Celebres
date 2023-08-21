@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutoresController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\FrasesController;
