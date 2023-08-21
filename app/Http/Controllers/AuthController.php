@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,8 +27,31 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-        $token = $user->createToken('auth_token')->plainTextToken();
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['data' => $user , 'access_token' => $token, 'token_type' => 'Bearer']);
+    }
+
+    public function login(Request $request){
+        if (!Auth::attempt($request->only('email','password'))) {
+            return response()->json(['message' => 'No autorizado', 401]);
+        }
+
+        $user = User::where('email', $request['email'])->firstOrFail();
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Hola ' . $user->name,
+            'accessToken' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user
+        ]);
+    }
+
+    public function logout(){
+        auth()->user()->tokens()->delete();
+        return [
+            'message' => 'Has cerrado sesión correctamente y el token de acceso fue eliminado'
+        ];
     }
 }
