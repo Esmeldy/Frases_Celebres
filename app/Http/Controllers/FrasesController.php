@@ -23,7 +23,7 @@ class FrasesController extends Controller
             $arrayFrase[] = [
                 'id' => $frase->id,
                 'frase' => $frase->frase,
-                'autor' => $frase->autor->nombre . '' . $frase->autor->apellidos,
+                'autor' => $frase->autor->nombre . ' ' . $frase->autor->apellidos,
                 'categoria' => $frase->categoria->categoria,
             ];
         }
@@ -59,7 +59,7 @@ class FrasesController extends Controller
             $nombreAutor = $request->autor;
         }
 
-        $idAutorBuscado = Autores::where('nombre', $nombreAutor)->first();
+        $idAutorBuscado = Autores::where('nombre','LIKE', '%'.$nombreAutor.'%')->first();
 
         if ($idAutorBuscado) {
             $idAutor = $idAutorBuscado->id;
@@ -72,8 +72,8 @@ class FrasesController extends Controller
         $tipoCategoria = $request->categoria;
         $idCategoria = -1;
 
-        $categoria = Categorias::where('categoria', $tipoCategoria)->first();
-
+        $categoria = Categorias::where('categoria', 'LIKE', '%'.$tipoCategoria.'%')->first();
+        
         if (!$categoria) {
             $idCategoria = Categorias::where('categoria', 'otro')->first()->id;
         } else {
@@ -208,7 +208,7 @@ class FrasesController extends Controller
             $arrayFrase[] = [
                 'id' => $frase->id,
                 'frase' => $frase->frase,
-                'autor' => $frase->autor->nombre . '' . $frase->autor->apellidos,
+                'autor' => $frase->autor->nombre . ' ' . $frase->autor->apellidos,
                 'categoria' => $frase->categoria->categoria,
             ];
         }
