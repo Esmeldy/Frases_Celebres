@@ -29,7 +29,7 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         $nombreCategoria = trim($request->categoria); //Eliminar espacios en los extremos
-        $nombreCategoria = strtolower($nombreCategoria); //pasar a minúscula
+        $nombreCategoria = mb_strtolower($nombreCategoria, 'UTF-8'); //pasar a minúscula
 
         //comprobarsi existe categoria
         $findCategoria = Categorias::where('categoria', $nombreCategoria)->get()->toArray();

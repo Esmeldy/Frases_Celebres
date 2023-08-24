@@ -39,9 +39,9 @@ Route::resource('categorias', CategoriasController::class)
 Route::resource('autores', AutoresController::class)
     ->only(['index', 'show']);
 
+Route::get('/frases/random', [FrasesController::class, 'getRandomFrases'])->name('random');
 Route::apiResource('frases', FrasesController::class)
     ->only(['index', 'show'])
     ->missing(function (Request $request) {
         return Redirect::route('frases.index');
     });
-Route::get('/random', [FrasesController::class, 'getRandomFrases'])->name('random');

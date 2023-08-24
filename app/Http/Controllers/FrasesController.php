@@ -73,7 +73,7 @@ class FrasesController extends Controller
         $idCategoria = -1;
 
         $categoria = Categorias::where('categoria', 'LIKE', '%'.$tipoCategoria.'%')->first();
-        
+
         if (!$categoria) {
             $idCategoria = Categorias::where('categoria', 'otro')->first()->id;
         } else {
