@@ -59,12 +59,12 @@ class FrasesController extends Controller
             $nombreAutor = $request->autor;
         }
 
-        $idAutorBuscado = Autores::where('nombre','LIKE', '%'.$nombreAutor.'%')->first();
-
-        if ($idAutorBuscado) {
+        if (!is_null($nombreAutor)){
+            $idAutorBuscado = Autores::where('nombre','LIKE', '%'.$nombreAutor.'%')->first();
             $idAutor = $idAutorBuscado->id;
+
         } else {
-            $idAutor = null;
+            $idAutor = 2; // 2 - Desconocido
         }
 
 
