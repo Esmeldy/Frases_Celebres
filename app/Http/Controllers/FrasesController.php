@@ -16,18 +16,12 @@ class FrasesController extends Controller
      */
     public function index()
     {
-        $arrayFrase = [];
+
         $frases = Frases::all();
 
-        foreach ($frases as $frase) {
-            $arrayFrase[] = [
-                'id' => $frase->id,
-                'frase' => $frase->frase,
-                'autor' => $frase->autor->nombre . ' ' . $frase->autor->apellidos,
-                'categoria' => $frase->categoria->categoria,
-            ];
-        }
-        return response()->json($arrayFrase);
+        $data = $this->getArrayFrases($frases);
+
+        return response()->json($data);
     }
 
     /**
@@ -54,7 +48,6 @@ class FrasesController extends Controller
 
         if (count($autor) > 1) {
             $nombreAutor = $autor[0];
-            $apellidosAutor = $autor[1];
         } else {
             $nombreAutor = $request->autor;
         }
@@ -87,12 +80,13 @@ class FrasesController extends Controller
         $frase->categoria_id = $idCategoria;
         $frase->autor_id = $idAutor;
 
-        //Controlar que la frase no esté añadida
-        if ($this->isAdded($frase->frase)) {
-            return response()->json('La frase ya se encuentra en la base de datos', 404);
-        }
         if (empty($frase->frase)) {
             return response()->json('No ha escrito ninguna frase', 404);
+        }
+
+        //Controlar que la frase no esté añadida en la BD
+        if ($this->quoteIsAdded($frase->frase)) {
+            return response()->json('La frase ya se encuentra en la base de datos', 404);
         }
 
         $frase->save();
@@ -104,7 +98,7 @@ class FrasesController extends Controller
      * Método que devuelve si la frase existe o no
      * en la BD
      */
-    public function isAdded($frase): bool
+    public function quoteIsAdded($frase): bool
     {
         $encontrado = Frases::where('frase', $frase)->first();
 
@@ -203,8 +197,21 @@ class FrasesController extends Controller
      */
     public function getRandomFrases()
     {
-        $arrayFrase = [];
+
         $frases = Frases::all();
+        $data = $this->getArrayFrases($frases);
+
+        $randomNum = random_int(0, count($frases) - 1);
+
+        return response()->json($data[$randomNum]);
+    }
+
+    /**
+     * Función que recibe una lista de frases y las tranforma en un array con
+     * los IDs convertidos en nombres, no en números.
+     */
+    public function getArrayFrases($frases) : array{
+        $arrayFrase = [];
 
         foreach ($frases as $frase) {
             $arrayFrase[] = [
@@ -215,8 +222,6 @@ class FrasesController extends Controller
             ];
         }
 
-        $randomNum = random_int(0, count($frases) - 1);
-
-        return response()->json($arrayFrase[$randomNum]);
+        return $arrayFrase;
     }
 }
