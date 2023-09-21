@@ -27,16 +27,11 @@ class AutoresController extends Controller
      */
     public function store(Request $request)
     {
-        $nombre = trim($request->nombre); //Eliminar espacios
-        $nombre = mb_strtolower($nombre, 'UTF-8'); //pasar a minúscula
-        $nombre = ucfirst($nombre); //convertir la primera letra en mayúscula
+        $nombre = $this->sanitateText($request, "nombre");
 
+        $apellidos = $this->sanitateText($request, "apellidos");
 
-        $apellidos = trim($request->apellidos);
-        $apellidos = mb_strtolower($apellidos,'UTF-8');
-        $apellidos = ucfirst($apellidos);
-
-        $descripcion = trim($request->descripcion);
+        $descripcion = $this->sanitateText($request, "descripcion");
 
         $data = [
             'error' => 'Faltan campos por rellenar',
@@ -137,12 +132,9 @@ class AutoresController extends Controller
 
             return response()->json($data, 404);
         }
-        $nombre = trim($request->nombre);
-
-        $apellidos = trim($request->apellidos);
-
-        $descripcion = trim($request->descripcion);
-
+        $nombre = $this->sanitateText($request, "nombre");
+        $apellidos = $this->sanitateText($request, "apellidos");
+        $descripcion = $this->sanitateText($request, "descripcion");
 
         $autor->nombre = $nombre;
         $autor->apellidos = $apellidos;
@@ -180,5 +172,13 @@ class AutoresController extends Controller
             'autor' => $autor
         ];
         return response()->json($data, 200);
+    }
+
+    private function sanitateText(Request $request, $field) {
+        $fieldSanitated = trim($request->$field); //Eliminar espacios
+        $fieldSanitated = mb_strtolower($fieldSanitated, 'UTF-8'); //pasar a minúscula
+        $fieldSanitated = ucfirst($fieldSanitated); //convertir la primera letra en mayúscula
+
+        return $fieldSanitated;
     }
 }
