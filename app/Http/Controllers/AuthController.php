@@ -47,7 +47,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        auth()->user()->tokens()->delete();
+        auth()->user()->currentAccessToken()->delete();
         return [
             'message' => 'Has cerrado sesión correctamente y el token de acceso fue eliminado'
         ];
