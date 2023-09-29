@@ -1,4 +1,10 @@
 <h1 align="center">Frases Celebres o motivadoras</h1>
+<h1>Probar proyecto</h1>
+<h2 align="center">
+https://apifrases.esmeldy.com/api/frases
+    <br>
+</h2>
+<br>
 
 <span align="justify" >Este es un proyecto que contiene frases de distintos personajes históricos o relevantes en la historia.</span>
 <p align="justify" >Es una aplicación de tipo Api Rest que contiene una serie de rutas HTTP, para <strong>obtener frases, actualizar, o incluso, introducir si se desea. </strong></p>
@@ -8,6 +14,7 @@
      <li>PHP con Laravel</li>
      <li>Laravel Sanctum para el registro y autenticación</li>
      <li>BBDD MySql para almacenar la información</li>
+     <li>JWT</li>
  </ul>
 <h2>Rutas HTTP y Usos</h2>
 
