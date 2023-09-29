@@ -15,6 +15,7 @@ https://apifrases.esmeldy.com/api/frases
      <li>Laravel Sanctum para el registro y autenticación</li>
      <li>BBDD MySql para almacenar la información</li>
      <li>JWT</li>
+     <li>PostMan</li>
  </ul>
 <h2>Rutas HTTP y Usos</h2>
 
