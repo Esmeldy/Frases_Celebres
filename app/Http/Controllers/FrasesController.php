@@ -19,7 +19,7 @@ class FrasesController extends Controller
 
         $frases = Frases::all();
 
-        $data = $this->getArrayFrases($frases);
+        $data = $this->getConvertedArrayFrases($frases);
 
         return response()->json($data);
     }
@@ -199,7 +199,7 @@ class FrasesController extends Controller
     {
 
         $frases = Frases::all();
-        $data = $this->getArrayFrases($frases);
+        $data = $this->getConvertedArrayFrases($frases);
 
         $randomNum = random_int(0, count($frases) - 1);
 
@@ -207,10 +207,59 @@ class FrasesController extends Controller
     }
 
     /**
+     * Devuelve las frases correcpondientes con el autor recibido
+     * tanto por id como por nombre del autor
+     */
+    public function getFrasesByAutor($autor){
+        //Puede Ser nombre o ID ???
+        $frases = null;
+      if (is_numeric($autor)) {
+         $frases = Frases::where('autor_id', $autor)->get();
+         $data = $this->getConvertedArrayFrases($frases);
+
+         return response()->json($data);
+
+      }else {
+        $autor = trim($autor);
+        $autor = explode(' ',$autor,2);
+
+            if (count($autor) != 2){
+                //Solo recibido el nombre
+                $autorNombre = $autor[0];
+                $autorEncontrado = Autores::where('nombre', 'like',$autorNombre)
+                    ->first();
+
+            }else {
+                //Recibido nombre y apellido
+                $autorNombre = $autor[0];
+                $autorApellido = $autor[1];
+                $autorEncontrado = Autores::where('nombre', 'like',$autorNombre)
+                    ->orWhere('apellidos', 'like', $autorApellido)
+                    ->first();
+
+            }
+        //Buscar Frases del Autor
+
+        if (empty($autorEncontrado)) {
+            $data = [
+                'message' => 'Frases del autor no encontradas',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $frases = Frases::where('autor_id', $autorEncontrado->id)->get();
+        $data = $this->getConvertedArrayFrases($frases);
+        return response()->json($data);
+
+      }
+
+    }
+
+    /**
      * Función que recibe una lista de frases y las tranforma en un array con
      * los IDs convertidos en nombres, no en números.
      */
-    public function getArrayFrases($frases) : array{
+    private function getConvertedArrayFrases($frases) : array{
         $arrayFrase = [];
 
         foreach ($frases as $frase) {

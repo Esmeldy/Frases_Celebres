@@ -40,6 +40,7 @@ Route::resource('autores', AutoresController::class)
     ->only(['index', 'show']);
 
 Route::get('/frases/random', [FrasesController::class, 'getRandomFrases'])->name('random');
+Route::get('/frases/byautor/{autor}', [FrasesController::class, 'getFrasesByAutor'])->name('byautor');
 Route::apiResource('frases', FrasesController::class)
     ->only(['index', 'show'])
     ->missing(function (Request $request) {
