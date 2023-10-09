@@ -19,7 +19,8 @@ https://apifrases.esmeldy.com/api/frases
  </ul>
 <h2>Rutas HTTP y Usos</h2>
 
-![032e1897e29caa2021df7a1fb1d8f862](https://github.com/Esmeldy/Frases_Celebres/assets/67498436/7cfa6f98-75e1-4da2-891d-9b666260723e)
+![60adfd20b2e1fdb7b35c0f47cec06621](https://github.com/Esmeldy/Frases_Celebres/assets/67498436/8ce95fb1-93f7-4994-9705-e5d46404200f)
+
 
 <h3>Para registrar un usuario</h3>
 
