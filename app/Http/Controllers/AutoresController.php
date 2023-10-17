@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Autores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AutoresController extends Controller
 {
@@ -175,7 +176,7 @@ class AutoresController extends Controller
     }
 
     private function sanitateText(Request $request, $field) {
-        $fieldSanitated = trim($request->$field); //Eliminar espacios
+        $fieldSanitated = Str::squish($request->$field); //Eliminar espacios
         $fieldSanitated = mb_strtolower($fieldSanitated, 'UTF-8'); //pasar a minúscula
         $fieldSanitated = ucfirst($fieldSanitated); //convertir la primera letra en mayúscula
 
