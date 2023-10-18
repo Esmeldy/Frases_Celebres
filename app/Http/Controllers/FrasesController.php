@@ -32,6 +32,11 @@ class FrasesController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     "frase"=> "required|string",
+        //     ""=> "",
+        // ]);
+
         //Objeto a guardar
         $frase = new Frases();
 
@@ -181,7 +186,7 @@ class FrasesController extends Controller
         if (!$frase) {
             return response()->json([
                 'message' => 'No se ha podido eliminar la frase porque no se encuentra en la base de datos.'
-            ]);
+            ],404);
         }
         $frase->delete();
         $data = [
