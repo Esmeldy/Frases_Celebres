@@ -6,6 +6,7 @@ use App\Models\Autores;
 use App\Models\Categorias;
 use App\Models\Frases;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FrasesController extends Controller
 {
@@ -17,11 +18,16 @@ class FrasesController extends Controller
     public function index()
     {
 
-        $frases = Frases::all();
 
-        $data = $this->getConvertedArrayFrases($frases);
+        $frases = Frases::
+              join('autores', 'autores.id','=','frases.autor_id')
+            ->join('categorias','categorias.id','=','frases.categoria_id')
+            ->select('frases.id','frase',DB::raw('CONCAT(autores.nombre, \' \', autores.apellidos) as autor'), 'categorias.categoria')
+            ->orderby('frases.id')
+            ->get();
 
-        return response()->json($data);
+
+        return response()->json($frases);
     }
 
     /**
