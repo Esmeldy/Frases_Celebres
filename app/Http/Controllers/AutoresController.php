@@ -181,6 +181,7 @@ class AutoresController extends Controller
         $fieldSanitated = Str::lower($fieldSanitated); //pasar a minúscula
         $fieldSanitated = Str::camel($fieldSanitated); //convertir la primera letra en mayúscula
 
+
         return $fieldSanitated;
     }
 }
