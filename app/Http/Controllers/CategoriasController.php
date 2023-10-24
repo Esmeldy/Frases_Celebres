@@ -28,6 +28,13 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
+        if (empty($request->categoria)) {
+            $data = [
+                'message' => 'El campo no puede estar vacío',
+            ];
+            return response()->json($data, 404);
+        }
+
         $nombreCategoria = trim($request->categoria); //Eliminar espacios en los extremos
         $nombreCategoria = mb_strtolower($nombreCategoria, 'UTF-8'); //pasar a minúscula
 
