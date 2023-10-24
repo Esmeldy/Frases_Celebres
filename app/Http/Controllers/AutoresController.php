@@ -6,7 +6,6 @@ use App\Models\Autores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-
 class AutoresController extends Controller
 {
     /**
@@ -177,10 +176,9 @@ class AutoresController extends Controller
     }
 
     private function sanitateText(Request $request, $field) {
-        $fieldSanitated = Str::of($request->$field)->trim(); //Eliminar espacios
-        $fieldSanitated = Str::lower($fieldSanitated); //pasar a minúscula
-        $fieldSanitated = Str::camel($fieldSanitated); //convertir la primera letra en mayúscula
-
+        $fieldSanitated = trim($request->$field); //Eliminar espacios
+        $fieldSanitated = mb_strtolower($fieldSanitated, 'UTF-8'); //pasar a minúscula
+        $fieldSanitated = ucfirst($fieldSanitated); //convertir la primera letra en mayúscula
 
         return $fieldSanitated;
     }
