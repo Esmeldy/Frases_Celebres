@@ -176,7 +176,7 @@ class AutoresController extends Controller
     }
 
     private function sanitateText(Request $request, $field) {
-        $fieldSanitated = Str::squish($request->$field); //Eliminar espacios
+        $fieldSanitated = Str::of($request->$field)->trim(); //Eliminar espacios
         $fieldSanitated = mb_strtolower($fieldSanitated, 'UTF-8'); //pasar a minúscula
         $fieldSanitated = ucfirst($fieldSanitated); //convertir la primera letra en mayúscula
 
