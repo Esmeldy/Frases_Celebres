@@ -18,7 +18,7 @@
                 "tags": [
                     "Acceso"
                 ],
-                "summary": "Register a new user",
+                "summary": "Registrar nuevo usuario",
                 "operationId": "8a56853624e025573120a09a4c75d468",
                 "parameters": [
                     {
