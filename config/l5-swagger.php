@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'Documentación con Swagger',
+                'title' => 'Frases Célebres',
             ],
 
             'routes' => [

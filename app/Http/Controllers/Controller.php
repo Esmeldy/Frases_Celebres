@@ -11,8 +11,8 @@ use Illuminate\Routing\Controller as BaseController;
     /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="Documentando la API con Swagger",
-     *      description="API sobre frases motivadoras",
+     *      title="Frases Célebres API",
+     *      description="API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores.",
      *      @OA\Contact(
      *          email="esmeldyfm@gmail.com"
      *      ),
