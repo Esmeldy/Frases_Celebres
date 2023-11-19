@@ -11,6 +11,36 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    /**
+* @OA\Post(
+     *     path="/api/register",
+     *     summary="Register a new user",
+     *     tags={"Acceso"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Nombre de usuario",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Correo electrónico",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="Contraseña",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="Usuario registrado correctamente"),
+     *     @OA\Response(response="401", description="Error de validación de datos")
+     * )
+     */
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
