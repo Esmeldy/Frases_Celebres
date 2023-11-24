@@ -6,7 +6,7 @@ https://apifrases.esmeldy.com/api/frases
 </h2>
 <br>
 
-<span align="justify" >Este es un proyecto que contiene frases de distintos personajes históricos o relevantes en la historia.</span>
+<span align="left" >Este es un proyecto que contiene frases de distintos personajes históricos o relevantes en la historia.</span>
 <p align="justify" >Es una aplicación de tipo Api Rest que contiene una serie de rutas HTTP, para <strong>obtener frases, actualizar, o incluso, introducir si se desea. </strong></p>
 
 <h2>Tecnología utilizada: </h2>
@@ -17,11 +17,14 @@ https://apifrases.esmeldy.com/api/frases
      <li>JWT</li>
      <li>PostMan</li>
  </ul>
-<h2>Rutas HTTP y Usos</h2>
+<h2>******************** Documentación *****************************</h2>
 
-![60adfd20b2e1fdb7b35c0f47cec06621](https://github.com/Esmeldy/Frases_Celebres/assets/67498436/8ce95fb1-93f7-4994-9705-e5d46404200f)
+<h3>
+https://apifrases.esmeldy.com/api/doc
+    <br>
+</h3>
 
-
+<br>
 <h3>Para registrar un usuario</h3>
 
 ![17823a7e3e72acc10e97d3306ea0c7ff](https://github.com/Esmeldy/Frases_Celebres/assets/67498436/08a25dad-49f4-4fa3-9213-ba8bb4620013)
