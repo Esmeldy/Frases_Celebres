@@ -147,8 +147,16 @@
             "description": "Endpoints de acceso"
         },
         {
+            "name": "Frases",
+            "description": "Endpoints de frases"
+        },
+        {
             "name": "Autores",
             "description": "Endpoints de autores"
+        },
+        {
+            "name": "Categorias",
+            "description": "Endpoints de categorias"
         }
     ]
 }

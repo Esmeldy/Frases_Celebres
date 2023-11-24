@@ -36,7 +36,18 @@ use Illuminate\Routing\Controller as BaseController;
      *     name="Acceso",
      *     description="Endpoints de acceso"
      * )
-
+     * @OA\Tag(
+     *     name="Frases",
+     *     description="Endpoints de frases"
+     * )
+     * @OA\Tag(
+     *     name="Autores",
+     *     description="Endpoints de autores"
+     * )
+     * @OA\Tag(
+     *     name="Categorias",
+     *     description="Endpoints de categorias"
+     * )
      *
      */
 class Controller extends BaseController
