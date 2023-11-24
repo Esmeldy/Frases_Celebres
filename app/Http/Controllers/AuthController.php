@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     /**
-* @OA\Post(
+     * @OA\Post(
      *     path="/api/register",
      *     summary="Registrar nuevo usuario",
      *     tags={"Acceso"},
@@ -41,7 +41,8 @@ class AuthController extends Controller
      *     @OA\Response(response="401", description="Error de validación de datos")
      * )
      */
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:users',
@@ -57,12 +58,41 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-        return response()->json(['message' => 'Usuario creado correctamente','user' => $user]);
+        return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user]);
     }
 
-    public function login(Request $request){
-        if (!Auth::attempt($request->only('email','password'))) {
-            return response()->json(['message' => 'No autorizado', 401]);
+    /**
+     *
+     * @OA\Post(
+     *      path="/api/login",
+     *      tags={"Acceso"},
+     *      summary="Login de usuarios",
+     *      description="Login con datos de usuarios registrados previamente.",
+     *
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Correo electrónico",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="Contraseña",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *
+     *     @OA\Response(response="200", description="Usuario logueado correctamente"),
+     *     @OA\Response(response="401", description="No autorizado.")
+     * )
+     *
+     */
+    public function login(Request $request)
+    {
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'No autorizado'],401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
@@ -76,7 +106,21 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(){
+    /**
+     *
+     *   @OA\Get(
+     *      path="/api/logout",
+     *      tags={"Acceso"},
+     *      summary="Cerrar sessión de usuario",
+     *      security={{"bearerAuth":{}}},
+     *
+     *      @OA\Response(response="200", description="Sessión cerrada correctamente", @OA\JsonContent()),
+     *      @OA\Response(response="401", description="No autorizado",@OA\JsonContent())
+     *   )
+     *
+     */
+    public function logout()
+    {
         auth()->user()->currentAccessToken()->delete();
         return [
             'message' => 'Has cerrado sesión correctamente y el token de acceso fue eliminado'
