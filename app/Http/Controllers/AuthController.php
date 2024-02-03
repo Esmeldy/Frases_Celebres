@@ -74,14 +74,16 @@ class AuthController extends Controller
      *         in="query",
      *         description="Correo electrónico",
      *         required=true,
-     *         @OA\Schema(type="string")
+     *         @OA\Schema(type="string"),
+     *         example= "info@jose.com"
      *     ),
      *     @OA\Parameter(
      *         name="password",
      *         in="query",
      *         description="Contraseña",
      *         required=true,
-     *         @OA\Schema(type="string")
+     *         @OA\Schema(type="string"),
+     *         example="Jose1234"
      *     ),
      *
      *     @OA\Response(response="200", description="Usuario logueado correctamente"),
