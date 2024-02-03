@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-//Documentacion
-Route::post('/doc', [AuthController::class, 'register'])->name('doc');
-
-
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
