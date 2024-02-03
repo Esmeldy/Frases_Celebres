@@ -83,6 +83,7 @@ class AuthController extends Controller
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
+     *      example={"email": "info@jose.com", "password": Jose1234}
      *
      *     @OA\Response(response="200", description="Usuario logueado correctamente"),
      *     @OA\Response(response="401", description="No autorizado.")
