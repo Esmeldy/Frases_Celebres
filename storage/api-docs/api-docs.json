@@ -75,7 +75,8 @@
                         "required": true,
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "example": "info@jose.com"
                     },
                     {
                         "name": "password",
@@ -84,7 +85,8 @@
                         "required": true,
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "example": "Jose1234"
                     }
                 ],
                 "responses": {
