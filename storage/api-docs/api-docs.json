@@ -444,9 +444,431 @@
                     }
                 ]
             }
+        },
+        "/api/frases": {
+            "get": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Obtiene una lista de frases con sus autores y categorías",
+                "operationId": "bb75b37eaa8e7627028787f7c7eddfe9",
+                "responses": {
+                    "200": {
+                        "description": "Lista de frases obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "ID de la frase",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "frase": {
+                                                "description": "Contenido de la frase",
+                                                "type": "string",
+                                                "example": "El amor en los tiempos del cólera."
+                                            },
+                                            "autor": {
+                                                "description": "Nombre completo del autor",
+                                                "type": "string",
+                                                "example": "Gabriel García Márquez"
+                                            },
+                                            "categoria": {
+                                                "description": "Nombre de la categoría",
+                                                "type": "string",
+                                                "example": "Novela"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron frases",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "No se encontraron frases"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Crea una nueva frase",
+                "operationId": "6cf8b30f01eabb2e9b3b2e00c5512397",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "frase": {
+                                        "description": "El contenido de la frase",
+                                        "type": "string",
+                                        "example": "El amor en los tiempos del cólera."
+                                    },
+                                    "autor": {
+                                        "description": "Nombre del autor de la frase",
+                                        "type": "string",
+                                        "example": "Gabriel García Márquez"
+                                    },
+                                    "categoria": {
+                                        "description": "Categoría de la frase",
+                                        "type": "string",
+                                        "example": "Novela"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Frase creada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "ID de la frase",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "frase": {
+                                            "description": "El contenido de la frase",
+                                            "type": "string",
+                                            "example": "El amor en los tiempos del cólera."
+                                        },
+                                        "autor_id": {
+                                            "description": "ID del autor asociado",
+                                            "type": "integer",
+                                            "example": 2
+                                        },
+                                        "categoria_id": {
+                                            "description": "ID de la categoría asociada",
+                                            "type": "integer",
+                                            "example": 3
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error en la creación de la frase",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "No ha escrito ninguna frase"
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "La frase ya existe en la base de datos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "La frase ya se encuentra en la base de datos"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/frases/{id}": {
+            "get": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Obtiene una frase específica por su ID",
+                "operationId": "1fb5f3eb836114c890d216e310869d3d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la frase a obtener",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Frase obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "ID de la frase",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "frase": {
+                                            "description": "Contenido de la frase",
+                                            "type": "string",
+                                            "example": "El amor en los tiempos del cólera."
+                                        },
+                                        "autor": {
+                                            "description": "Nombre completo del autor",
+                                            "type": "string",
+                                            "example": "Gabriel García Márquez"
+                                        },
+                                        "categoria": {
+                                            "description": "Nombre de la categoría",
+                                            "type": "string",
+                                            "example": "Novela"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Frase no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Frase no encontrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Actualiza una frase existente",
+                "operationId": "b9c920c53176bd7662742a11cfe9fc16",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la frase a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "frase": {
+                                        "description": "Contenido actualizado de la frase",
+                                        "type": "string",
+                                        "example": "El amor es eterno mientras dura."
+                                    },
+                                    "autor_id": {
+                                        "description": "ID del autor actualizado",
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "categoria_id": {
+                                        "description": "ID de la categoría actualizada",
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Frase actualizada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Frase actualizada correctamente"
+                                        },
+                                        "frase": {}
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Los campos no pueden estar vacíos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Los campos no pueden estar vacíos"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Elimina una frase existente",
+                "operationId": "448bd16482626caec619f6b1c9dec4b9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la frase a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Frase borrada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Frase borrada correctamente"
+                                        },
+                                        "frase": {}
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Frase no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No se ha podido eliminar la frase porque no se encuentra en la base de datos."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/frases/autor/{autor}": {
+            "get": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Obtiene frases por autor",
+                "operationId": "61e96c9d8cf270b5c574bfac05f03196",
+                "parameters": [
+                    {
+                        "name": "autor",
+                        "in": "path",
+                        "description": "Puede ser el ID del autor o su nombre completo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Gabriel García Márquez"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Frases obtenidas correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
+        "responses": {
+            "404": {
+                "description": "Frases del autor no encontradas",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Frases del autor no encontradas"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
