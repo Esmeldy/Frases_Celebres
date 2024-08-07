@@ -480,9 +480,30 @@ class FrasesController extends Controller
         return response()->json($data);
     }
 
+
     /**
-     * devuelve una frase aleatoria cada vez que se ejecute
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/frases/random",
+     *     summary="Obtiene una frase aleatoria",
+     *     tags={"Frases"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Frase aleatoria obtenida correctamente",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No se encontraron frases en la base de datos",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="No se encontraron frases en la base de datos."
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function getRandomFrases()
     {

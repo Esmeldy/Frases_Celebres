@@ -818,6 +818,41 @@
                 }
             }
         },
+        "/api/frases/random": {
+            "get": {
+                "tags": [
+                    "Frases"
+                ],
+                "summary": "Obtiene una frase aleatoria",
+                "operationId": "d9321360d8aae610eb6a5721f56e00d4",
+                "responses": {
+                    "200": {
+                        "description": "Frase aleatoria obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron frases en la base de datos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No se encontraron frases en la base de datos."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/frases/autor/{autor}": {
             "get": {
                 "tags": [
