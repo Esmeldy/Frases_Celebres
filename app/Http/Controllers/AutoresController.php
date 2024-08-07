@@ -9,9 +9,21 @@ use Illuminate\Support\Str;
 class AutoresController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/autores",
+     *     summary="Obtiene una lista de autores",
+     *     tags={"Autores"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de autores",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Solicitud incorrecta"
+     *     )
+     * )
      */
     public function index()
     {
@@ -20,11 +32,79 @@ class AutoresController extends Controller
         return response()->json($autores, 200);
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *     path="/api/autores",
+     *     summary="Crea un nuevo autor",
+     *     tags={"Autores"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="nombre",
+     *                 type="string",
+     *                 description="Nombre del autor",
+     *                 example="Gabriel"
+     *             ),
+     *             @OA\Property(
+     *                 property="apellidos",
+     *                 type="string",
+     *                 description="Apellidos del autor",
+     *                 example="García Márquez"
+     *             ),
+     *             @OA\Property(
+     *                 property="descripcion",
+     *                 type="string",
+     *                 description="Descripción del autor",
+     *                 example="Escritor colombiano, autor de 'Cien años de soledad'."
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Respuesta exitosa",
+     *         @OA\JsonContent(
+     *             oneOf={
+     *                 @OA\Schema(
+     *                     type="object",
+     *                     @OA\Property(
+     *                         property="message",
+     *                         type="string",
+     *                         example="Autor creado correctamente"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="autor",
+     *                     )
+     *                 ),
+     *                 @OA\Schema(
+     *                     type="object",
+     *                     @OA\Property(
+     *                         property="error",
+     *                         type="string",
+     *                         example="El autor ya se encuentra en la base de datos"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="autor")
+     *                 )
+     *             }
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Faltan campos por rellenar o algo ha ido mal",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="error",
+     *                 type="string",
+     *                 example="Faltan campos por rellenar"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -85,10 +165,42 @@ class AutoresController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Autores  $autores
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/autores/{id}",
+     *     summary="Muestra un autor específico",
+     *     tags={"Autores"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID del autor"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Detalles del autor",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="autor")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Autor no encontrado",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Autor no encontrado"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function show($id)
     {
@@ -107,11 +219,71 @@ class AutoresController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Autores  $autores
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/api/autores/{id}",
+     *     summary="Actualiza un autor existente",
+     *     tags={"Autores"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID del autor"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="nombre",
+     *                 type="string",
+     *                 description="Nombre del autor",
+     *                 example="Gabriel"
+     *             ),
+     *             @OA\Property(
+     *                 property="apellidos",
+     *                 type="string",
+     *                 description="Apellidos del autor",
+     *                 example="García Márquez"
+     *             ),
+     *             @OA\Property(
+     *                 property="descripcion",
+     *                 type="string",
+     *                 description="Descripción del autor",
+     *                 example="Escritor colombiano, autor de 'Cien años de soledad'."
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Autor actualizado correctamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Autor actualizado correctamente"
+     *             ),
+     *             @OA\Property(
+     *                 property="autor")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Autor no encontrado o campos vacíos",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Autor no encontrado"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -150,11 +322,49 @@ class AutoresController extends Controller
         return response()->json($data, 200);
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Autores  $autores
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *     path="/api/autores/{id}",
+     *     summary="Elimina un autor existente",
+     *     tags={"Autores"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID del autor"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Autor borrado correctamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Autor borrado correctamente"
+     *             ),
+     *             @OA\Property(
+     *                 property="autor")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Autor no encontrado",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Autor no encontrado"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function destroy($autorId)
     {
