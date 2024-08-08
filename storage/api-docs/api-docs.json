@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Frases Célebres API",
-        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores.",
+        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores. Creado en Laravel",
         "contact": {
             "email": "esmeldyfm@gmail.com"
         },
