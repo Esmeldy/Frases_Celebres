@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Autores;
 use App\Models\Categorias;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
 {
+
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/categorias",
+     *     summary="Obtiene una lista de todas las categorías",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de categorías obtenida correctamente",
+     *         @OA\JsonContent()
+     *         )
+     *     )
+     * )
      */
     public function index()
     {

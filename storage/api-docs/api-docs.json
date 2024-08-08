@@ -445,6 +445,30 @@
                 ]
             }
         },
+        "/api/categorias": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Obtiene una lista de todas las categorías",
+                "operationId": "06b55f5afd9a3d5faffb49009a7a2ed6",
+                "responses": {
+                    "200": {
+                        "description": "Lista de categorías obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/frases": {
             "get": {
                 "tags": [
