@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Frases Célebres API",
-        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores. Creado en Laravel",
+        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores. Creado en Laravel.",
         "contact": {
             "email": "esmeldyfm@gmail.com"
         },
@@ -467,6 +467,56 @@
                         "bearerAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Crea una nueva categoría",
+                "operationId": "baaca1a3ada1fba981002fbe589ef002",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "categoria": {
+                                        "description": "Nombre de la categoría a crear",
+                                        "type": "string",
+                                        "example": "Literatura"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Categoría creada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Categoría creada correctamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error al crear la categoría",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/frases": {
