@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Frases Célebres API",
-        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores. Creado en Laravel.",
+        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores.",
         "contact": {
             "email": "esmeldyfm@gmail.com"
         },
@@ -513,6 +513,53 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categorias/{id}": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Obtiene una categoría por su ID",
+                "operationId": "b8dc7e2b47247b0dd693530549a9784a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la categoría a obtener",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoría encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Categoría no encontrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
                             }
                         }
                     }

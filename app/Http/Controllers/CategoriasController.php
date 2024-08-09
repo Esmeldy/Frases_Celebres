@@ -100,12 +100,41 @@ class CategoriasController extends Controller
         return response()->json($data, 200);
     }
 
+
     /**
-     *
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Categorias  $categorias
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/categorias/{id}",
+     *     summary="Obtiene una categoría por su ID",
+     *     tags={"Categorias"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID de la categoría a obtener",
+     *         example=1
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categoría encontrada",
+     *         @OA\JsonContent()
+     *         
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Categoría no encontrada",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Categoría no encontrada"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function show($id)
     {
