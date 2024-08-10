@@ -120,7 +120,7 @@ class CategoriasController extends Controller
      *         response=200,
      *         description="Categoría encontrada",
      *         @OA\JsonContent()
-     *         
+     *
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -153,12 +153,59 @@ class CategoriasController extends Controller
     }
 
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categorias  $categorias
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/api/categorias/{id}",
+     *     summary="Actualiza una categoría existente",
+     *     tags={"Categorias"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID de la categoría a actualizar",
+     *         example=1
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="categoria",
+     *                 type="string",
+     *                 description="Nuevo nombre de la categoría",
+     *                 example="Novela"
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categoría actualizada correctamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Categoría actualizada correctamente"
+     *             ),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Categoría no encontrada o el campo está vacío",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Categoría no encontrada"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function update(Request $request, $id)
     {
