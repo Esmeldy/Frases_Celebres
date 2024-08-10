@@ -11,8 +11,8 @@ use Illuminate\Routing\Controller as BaseController;
     /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="Frases Célebres API",
-     *      description="API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores.",
+     *      title="API Frases Célebres",
+     *      description="API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores. Creado en Laravel",
      *      @OA\Contact(
      *          email="esmeldyfm@gmail.com"
      *      ),
