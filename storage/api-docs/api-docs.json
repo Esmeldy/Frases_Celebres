@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Frases Célebres API",
-        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores.",
+        "title": "API Frases Célebres",
+        "description": "API sobre frases célebres y motivadoras en castellano. Contiene categoria y autores. Creado en Laravel",
         "contact": {
             "email": "esmeldyfm@gmail.com"
         },
@@ -516,7 +516,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/categorias/{id}": {
@@ -563,7 +568,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -633,7 +643,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -686,7 +701,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/frases": {
