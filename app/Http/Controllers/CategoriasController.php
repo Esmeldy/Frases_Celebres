@@ -36,6 +36,7 @@ class CategoriasController extends Controller
      *     path="/api/categorias",
      *     summary="Crea una nueva categoría",
      *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -106,6 +107,7 @@ class CategoriasController extends Controller
      *     path="/api/categorias/{id}",
      *     summary="Obtiene una categoría por su ID",
      *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -159,6 +161,7 @@ class CategoriasController extends Controller
      *     path="/api/categorias/{id}",
      *     summary="Actualiza una categoría existente",
      *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -241,11 +244,48 @@ class CategoriasController extends Controller
         return response()->json($data, 200);
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Categorias  $categorias
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *     path="/api/categorias/{id}",
+     *     summary="Elimina una categoría existente",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID de la categoría a eliminar",
+     *         example=1
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categoría borrada correctamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Categoría borrada correctamente"
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Categoría no encontrada",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Categoría no encontrada"
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function destroy($idCategoria)
     {
@@ -266,7 +306,3 @@ class CategoriasController extends Controller
         return response()->json($data, 200);
     }
 }
-
-//Faltaría añadir más autores y frases de dichos autores
-
-// yyyy despues añadir seguridad
